@@ -13,44 +13,46 @@ import java.util.ArrayList;
 
 
 @RestController
-public class PersoanaController {
-  private List<Persoana> persoane = new ArrayList<Persoana>();
+public class ProdusController {
+  private List<Produs> produs = new ArrayList<Produs>();
 
-  PersoanaController() {
-    Persoana p1 = new Persoana(1, "John");
-    Persoana p2 = new Persoana(2, "Paul");
-    Persoana p3 = new Persoana(3, "Paul");
+  ProdusController() {
+    Produs p1 = new Produs(1, "Jasfsd", 10);
+    Produs p2 = new Produs(2, "Pgfdsgdl",15);
+    Produs p3 = new Produs(3, "hgjkljkjh",20);
 
-    persoane.add(p1);
-    persoane.add(p2);
-    persoane.add(p3);
+    produs.add(p1);
+    produs.add(p2);
+    produs.add(p3);
+}
+
+  @RequestMapping(value="/produs", method = RequestMethod.GET)
+  public List<Produs> index() {
+    return this.produs;
   }
 
-  @RequestMapping(value="/persoana", method = RequestMethod.GET)
-  public List<Persoana> index() {
-    return this.persoane;
-  }
- 
- 
- 
- 
-@RequestMapping(value="/persoana", method = RequestMethod.POST)
+
+@RequestMapping(value="/produs", method = RequestMethod.POST)
   public ResponseEntity post() {
     
-	  Persoana pp = new Persoana(10, "maria");
-	  persoane.add(pp);
+	  Produs pp = new Produs(10, "produsx", 22);
+	  produs.add(pp);
     
-    return new ResponseEntity <Persoana>(pp, new HttpHeaders(), HttpStatus.OK);
+    return new ResponseEntity<Produs>(pp, new HttpHeaders(), HttpStatus.NOT_FOUND);
   }
 	
+	
+	
 
-@RequestMapping(value="/persoana/{id}", method = RequestMethod.PUT)
+@RequestMapping(value="/produs/{id}", method = RequestMethod.PUT)
 public ResponseEntity put(@PathVariable("id") int id) {
-	for(Persoana p : this.persoane) {
+	for(Produs p : this.produs) {
       if(p.getId() == id) {
-		 p.setID(5);
-		 p.setName("Ale");
-		return new ResponseEntity<Persoana>(p, new HttpHeaders(), HttpStatus.OK);
+		  p.setID(22);
+		  p.setName("produsv");
+		  p.setPret(123);
+		  
+		return new ResponseEntity<Produs>(p, new HttpHeaders(), HttpStatus.OK);
       }
     }
     return new ResponseEntity<String>(null, new HttpHeaders(), HttpStatus.NOT_FOUND);
@@ -58,11 +60,14 @@ public ResponseEntity put(@PathVariable("id") int id) {
 
   
   
-  @RequestMapping(value="/persoana/{id}", method = RequestMethod.GET)
+  
+  
+  
+  @RequestMapping(value="/produs/{id}", method = RequestMethod.GET)
   public ResponseEntity show(@PathVariable("id") int id) {
-    for(Persoana p : this.persoane) {
+    for(Produs p : this.produs) {
       if(p.getId() == id) {
-        return new ResponseEntity<Persoana>(p, new HttpHeaders(), HttpStatus.OK);
+        return new ResponseEntity<Produs>(p, new HttpHeaders(), HttpStatus.OK);
       }
     }
     return new ResponseEntity<String>(null, new HttpHeaders(), HttpStatus.NOT_FOUND);
@@ -72,11 +77,11 @@ public ResponseEntity put(@PathVariable("id") int id) {
   
   
   
-  @RequestMapping(value="/persoana/{id}", method = RequestMethod.DEL)
+  @RequestMapping(value="/produs/{id}", method = RequestMethod.DEL)
   public ResponseEntity remove(@PathVariable("id") int id) {
-    for(Persoana p : this.persoane) {
+    for(Produs p : this.produs) {
       if(p.getId() == id) {
-        this.persoane.remove(p);
+        this.produs.remove(p);
         return new ResponseEntity<String>(null, new HttpHeaders(), HttpStatus.NO_CONTENT);
       }
     }

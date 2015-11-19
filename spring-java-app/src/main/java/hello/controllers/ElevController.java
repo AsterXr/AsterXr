@@ -13,44 +13,45 @@ import java.util.ArrayList;
 
 
 @RestController
-public class PersoanaController {
-  private List<Persoana> persoane = new ArrayList<Persoana>();
+public class ElevController {
+  private List<Elev> elevi = new ArrayList<Elev>();
 
-  PersoanaController() {
-    Persoana p1 = new Persoana(1, "John");
-    Persoana p2 = new Persoana(2, "Paul");
-    Persoana p3 = new Persoana(3, "Paul");
+  ElevController() {
+    Elev p1 = new Elev(1, 10, "John");
+    Elev p2 = new Elev(2, 1, "Paul");
+    Elev p3 = new Elev(3, 7, "Paul");
 
-    persoane.add(p1);
-    persoane.add(p2);
-    persoane.add(p3);
+    elevi.add(p1);
+    elevi.add(p2);
+    elevi.add(p3);
   }
 
-  @RequestMapping(value="/persoana", method = RequestMethod.GET)
-  public List<Persoana> index() {
-    return this.persoane;
+  @RequestMapping(value="/elev", method = RequestMethod.GET)
+  public List<Elev> index() {
+    return this.elevi;
   }
  
  
  
  
-@RequestMapping(value="/persoana", method = RequestMethod.POST)
+@RequestMapping(value="/elev", method = RequestMethod.POST)
   public ResponseEntity post() {
     
-	  Persoana pp = new Persoana(10, "maria");
-	  persoane.add(pp);
+	  Elev pp = new Elev(10, 8, "Cruela");
+	  elevi.add(pp);
     
-    return new ResponseEntity <Persoana>(pp, new HttpHeaders(), HttpStatus.OK);
+    return new ResponseEntity <Elev>(pp, new HttpHeaders(), HttpStatus.OK);
   }
 	
 
-@RequestMapping(value="/persoana/{id}", method = RequestMethod.PUT)
+@RequestMapping(value="/elev/{id}", method = RequestMethod.PUT)
 public ResponseEntity put(@PathVariable("id") int id) {
-	for(Persoana p : this.persoane) {
+	for(Elev p : this.elevi) {
       if(p.getId() == id) {
 		 p.setID(5);
-		 p.setName("Ale");
-		return new ResponseEntity<Persoana>(p, new HttpHeaders(), HttpStatus.OK);
+		 p.setName("Viki");
+		 p.setNota(2);
+		return new ResponseEntity<Elev>(p, new HttpHeaders(), HttpStatus.OK);
       }
     }
     return new ResponseEntity<String>(null, new HttpHeaders(), HttpStatus.NOT_FOUND);
@@ -58,11 +59,11 @@ public ResponseEntity put(@PathVariable("id") int id) {
 
   
   
-  @RequestMapping(value="/persoana/{id}", method = RequestMethod.GET)
+  @RequestMapping(value="/elev/{id}", method = RequestMethod.GET)
   public ResponseEntity show(@PathVariable("id") int id) {
-    for(Persoana p : this.persoane) {
+    for(Elev p : this.elevi) {
       if(p.getId() == id) {
-        return new ResponseEntity<Persoana>(p, new HttpHeaders(), HttpStatus.OK);
+        return new ResponseEntity<Elev>(p, new HttpHeaders(), HttpStatus.OK);
       }
     }
     return new ResponseEntity<String>(null, new HttpHeaders(), HttpStatus.NOT_FOUND);
@@ -72,11 +73,11 @@ public ResponseEntity put(@PathVariable("id") int id) {
   
   
   
-  @RequestMapping(value="/persoana/{id}", method = RequestMethod.DEL)
+  @RequestMapping(value="/elev/{id}", method = RequestMethod.DEL)
   public ResponseEntity remove(@PathVariable("id") int id) {
-    for(Persoana p : this.persoane) {
+    for(Elev p : this.elevi) {
       if(p.getId() == id) {
-        this.persoane.remove(p);
+        this.elevi.remove(p);
         return new ResponseEntity<String>(null, new HttpHeaders(), HttpStatus.NO_CONTENT);
       }
     }
