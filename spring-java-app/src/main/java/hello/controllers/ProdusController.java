@@ -33,9 +33,9 @@ public class ProdusController {
 
 
 @RequestMapping(value="/produs", method = RequestMethod.POST)
-  public ResponseEntity post() {
+  public ResponseEntity post(@PathVariable("id") int id, @PathVariable("name")String name, @PathVariable("pret") int pret) {
     
-	  Produs pp = new Produs(10, "produsx", 22);
+	  Produs pp = new Produs(id, name, pret);
 	  produs.add(pp);
     
     return new ResponseEntity<Produs>(pp, new HttpHeaders(), HttpStatus.NOT_FOUND);
@@ -45,12 +45,12 @@ public class ProdusController {
 	
 
 @RequestMapping(value="/produs/{id}", method = RequestMethod.PUT)
-public ResponseEntity put(@PathVariable("id") int id) {
+public ResponseEntity put(@PathVariable("id") int id, @PathVariable("name")String name, @PathVariable("pret") int pret) {
 	for(Produs p : this.produs) {
       if(p.getId() == id) {
-		  p.setID(22);
-		  p.setName("produsv");
-		  p.setPret(123);
+		 
+		  p.setName(name);
+		  p.setPret(pret);
 		  
 		return new ResponseEntity<Produs>(p, new HttpHeaders(), HttpStatus.OK);
       }

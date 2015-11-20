@@ -35,9 +35,9 @@ public class ElevController {
  
  
 @RequestMapping(value="/elev", method = RequestMethod.POST)
-  public ResponseEntity post() {
+  public ResponseEntity post(@PathVariable("id") int id, @PathVariable("nota") int nota, @PathVariable("name")String name) {
     
-	  Elev pp = new Elev(10, 8, "Cruela");
+	  Elev pp = new Elev(id, nota, name);
 	  elevi.add(pp);
     
     return new ResponseEntity <Elev>(pp, new HttpHeaders(), HttpStatus.OK);
@@ -45,12 +45,11 @@ public class ElevController {
 	
 
 @RequestMapping(value="/elev/{id}", method = RequestMethod.PUT)
-public ResponseEntity put(@PathVariable("id") int id) {
+public ResponseEntity put(@PathVariable("id") int id, @PathVariable("nota") int nota, @PathVariable("name")String name) {
 	for(Elev p : this.elevi) {
       if(p.getId() == id) {
-		 p.setID(5);
-		 p.setName("Viki");
-		 p.setNota(2);
+		 p.setName(name);
+		 p.setNota(nota);
 		return new ResponseEntity<Elev>(p, new HttpHeaders(), HttpStatus.OK);
       }
     }

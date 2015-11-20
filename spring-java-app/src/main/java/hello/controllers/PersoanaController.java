@@ -35,9 +35,9 @@ public class PersoanaController {
  
  
 @RequestMapping(value="/persoana", method = RequestMethod.POST)
-  public ResponseEntity post() {
+  public ResponseEntity post(@PathVariable("id") int id, @PathVariable("name")String name) {
     
-	  Persoana pp = new Persoana(10, "maria");
+	  Persoana pp = new Persoana(id, name);
 	  persoane.add(pp);
     
     return new ResponseEntity <Persoana>(pp, new HttpHeaders(), HttpStatus.OK);
@@ -45,11 +45,10 @@ public class PersoanaController {
 	
 
 @RequestMapping(value="/persoana/{id}", method = RequestMethod.PUT)
-public ResponseEntity put(@PathVariable("id") int id) {
+public ResponseEntity put(@PathVariable("id") int id, @PathVariable("name")String name) {
 	for(Persoana p : this.persoane) {
       if(p.getId() == id) {
-		 p.setID(5);
-		 p.setName("Ale");
+		 p.setName(name);
 		return new ResponseEntity<Persoana>(p, new HttpHeaders(), HttpStatus.OK);
       }
     }
